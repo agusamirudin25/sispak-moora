@@ -48,9 +48,10 @@ class Gejala
         $input = post();
         $kode_gejala = $input['kode_gejala'];
         $nama_gejala = $input['gejala'];
+        $bobot = $input['bobot'];
 
         // query insert
-        $insert = $this->_db->insert("INSERT INTO tb_gejala(kode_gejala, gejala) values ('$kode_gejala', '$nama_gejala')");
+        $insert = $this->_db->insert("INSERT INTO tb_gejala(kode_gejala, gejala, bobot) values ('$kode_gejala', '$nama_gejala', '$bobot')");
         if ($insert) {
             $res['status'] = 1;
             $res['msg'] = "Data gejala berhasil ditambahkan";
@@ -74,8 +75,9 @@ class Gejala
         $input = post();
         $kode_gejala = $input['kode_gejala'];
         $nama_gejala = $input['gejala'];
+        $bobot = $input['bobot'];
         // query update
-        $update = $this->_db->edit("UPDATE tb_gejala SET gejala = '$nama_gejala' WHERE kode_gejala = '$kode_gejala'");
+        $update = $this->_db->edit("UPDATE tb_gejala SET gejala = '$nama_gejala', bobot = '$bobot' WHERE kode_gejala = '$kode_gejala'");
         if ($update) {
             $res['status'] = 1;
             $res['msg'] = "Data gejala berhasil diubah";

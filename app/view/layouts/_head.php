@@ -71,6 +71,36 @@
                             <span class="link-title">Data Gejala</span>
                         </a>
                     </li>
+                    <li class="nav-item <?= $uri[2] == 'Solusi' || $uri[2] == 'solusi' ? 'active' : '' ?>">
+                        <a href="<?= base_url('Solusi') ?>" class="nav-link">
+                            <i class="link-icon" data-feather="share-2"></i>
+                            <span class="link-title">Data Solusi</span>
+                        </a>
+                    </li>
+                    <li class="nav-item <?= $uri[2] == 'Konsultasi' || $uri[2] == 'konsultasi' ? 'active' : '' ?>">
+                        <a href="<?= base_url('Konsultasi') ?>" class="nav-link">
+                            <i class="link-icon" data-feather="wind"></i>
+                            <span class="link-title">Konsultasi</span>
+                        </a>
+                    </li>
+                    <li class="nav-item <?= $uri[2] == 'Diagnosis' || $uri[2] == 'Diagnosis' ? 'active' : '' ?>">
+                        <a href="<?= base_url('Diagnosis') ?>" class="nav-link">
+                            <i class="link-icon" data-feather="grid"></i>
+                            <span class="link-title">Diagnosis</span>
+                        </a>
+                    </li>
+                    <li class="nav-item <?= $uri[2] == 'Laporan' || $uri[2] == 'Laporan' ? 'active' : '' ?>">
+                        <a href="<?= base_url('Laporan') ?>" class="nav-link">
+                            <i class="link-icon" data-feather="book"></i>
+                            <span class="link-title">Laporan</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?= base_url('Auth/logout') ?>" class="nav-link">
+                            <i class="link-icon" data-feather="log-out"></i>
+                            <span class="link-title">Logout</span>
+                        </a>
+                    </li>
 
                 </ul>
             </div>
