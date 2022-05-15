@@ -72,27 +72,7 @@ class Database
     {
         return $this->conn->query("DELETE FROM `$tabel` WHERE `$field` = $data");
     }
-    function sinkronisasi($tabel, $jenis)
-    {
-        $countData = $this->conn->query("SELECT * FROM m_kecamatan GROUP BY id")->num_rows;
-        for ($i = 1; $i <= $countData; $i++) :
-            $this->conn->query("UPDATE tr_dataset 
-            SET total_" . $jenis . " = (
-                SELECT
-                    SUM( a.total_kejadian ) AS total_kejadian 
-                FROM
-                    `$tabel` a
-                    JOIN m_kecamatan b ON a.id_kecamatan = b.id 
-                WHERE
-                    a.id_kecamatan = $i 
-                GROUP BY
-                    a.id_kecamatan 
-                ) 
-            WHERE
-                tr_dataset.id_kecamatan = $i");
-        endfor;
-        return true;
-    }
+   
     function bind_param($sql, $param1, $param2)
     {
         $stmt = $this->conn->prepare($sql);
@@ -102,5 +82,12 @@ class Database
         $param2 = $param2;
 
         $stmt->execute();
+    }
+
+    function get_last_param($tabel, $param)
+    {
+        $sql = "SELECT * FROM $tabel ORDER BY $param DESC LIMIT 1";
+        $result = $this->conn->query($sql);
+        return $result->fetch_array();
     }
 }

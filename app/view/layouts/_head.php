@@ -59,6 +59,12 @@
                             <span class="link-title">Data Pengguna</span>
                         </a>
                     </li>
+                    <li class="nav-item <?= $uri[2] == 'Penyakit' ? 'active' : '' ?>">
+                        <a href="<?= base_url('Penyakit') ?>" class="nav-link">
+                            <i class="link-icon" data-feather="user"></i>
+                            <span class="link-title">Data Penyakit</span>
+                        </a>
+                    </li>
 
                 </ul>
             </div>
