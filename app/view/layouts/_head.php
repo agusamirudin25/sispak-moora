@@ -59,10 +59,16 @@
                             <span class="link-title">Data Pengguna</span>
                         </a>
                     </li>
-                    <li class="nav-item <?= $uri[2] == 'Penyakit' ? 'active' : '' ?>">
+                    <li class="nav-item <?= $uri[2] == 'Penyakit' || $uri[2] == 'penyakit' ? 'active' : '' ?>">
                         <a href="<?= base_url('Penyakit') ?>" class="nav-link">
-                            <i class="link-icon" data-feather="user"></i>
+                            <i class="link-icon" data-feather="aperture"></i>
                             <span class="link-title">Data Penyakit</span>
+                        </a>
+                    </li>
+                    <li class="nav-item <?= $uri[2] == 'Gejala' || $uri[2] == 'gejala' ? 'active' : '' ?>">
+                        <a href="<?= base_url('Gejala') ?>" class="nav-link">
+                            <i class="link-icon" data-feather="crosshair"></i>
+                            <span class="link-title">Data Gejala</span>
                         </a>
                     </li>
 
