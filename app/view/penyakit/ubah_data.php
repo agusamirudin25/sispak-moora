@@ -17,6 +17,18 @@
                                 <input type="text" class="form-control" id="penyakit" value="<?= $penyakit->penyakit ?>" placeholder="Penyakit" name="penyakit" required>
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="solusi" class="col-sm-3 col-form-label">Solusi</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" value="<?= $penyakit->solusi ?>" id="solusi" placeholder="Solusi" name="solusi" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="bobot" class="col-sm-3 col-form-label">Bobot</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="bobot" value="<?= $penyakit->bobot ?>" placeholder="bobot" name="bobot" required>
+                            </div>
+                        </div>
                         <button type="submit" class="btn btn-primary mr-2">Simpan</button>
                         <a href="javascript:history.back()" class="btn btn-light">Batal</a>
                     </form>

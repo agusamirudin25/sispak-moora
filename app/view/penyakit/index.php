@@ -9,19 +9,18 @@
                         <table id="table" class="table">
                             <thead>
                                 <tr>
-                                    <th>No</th>
                                     <th>Kode Penyakit</th>
                                     <th>Nama Penyakit</th>
+                                    <th>Solusi</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $no = 1; ?>
                                 <?php foreach($penyakit as $row): ?>
                                 <tr>
-                                    <td><?= $no++ ?></td>
                                     <td><?= $row['kode_penyakit'] ?></td>
                                     <td><?= $row['penyakit'] ?></td>
+                                    <td><?= $row['solusi'] ?? '-' ?></td>
                                     <td>
                                         <a href="<?= base_url('Penyakit/ubahPenyakit/' . $row['kode_penyakit']) ?>" class="btn btn-warning">Edit</a>
                                         <a href="#" onclick="delete_data('<?= $row['kode_penyakit'] ?>', 'Penyakit/hapusPenyakit')" role="button" class="btn btn-danger">Delete</a>

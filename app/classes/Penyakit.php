@@ -19,7 +19,6 @@ class Penyakit
 
     public function index()
     {
-        $data['role'] = (session_get('type') == 1) ? 'Admin' : 'Pakar';
         $data['penyakit'] = $this->_db->other_query("SELECT * FROM tb_penyakit", 2);
         view('layouts/_head');
         view('penyakit/index', $data);
@@ -28,7 +27,6 @@ class Penyakit
 
     public function tambahPenyakit()
     {
-        $data['role'] = (session_get('type') == 1) ? 'Admin' : 'Pakar';
         $kode_terakhir = $this->_db->get_last_param('tb_penyakit', 'kode_penyakit');
         if ($kode_terakhir) {
             $nilai_kode = substr($kode_terakhir['kode_penyakit'], 1);
@@ -48,9 +46,11 @@ class Penyakit
         $input = post();
         $kode_penyakit = $input['kode_penyakit'];
         $nama_penyakit = $input['penyakit'];
+        $solusi = $input['solusi'];
+        $bobot = $input['bobot'];
 
         // query insert
-        $insert = $this->_db->insert("INSERT INTO tb_penyakit(kode_penyakit, penyakit) values ('$kode_penyakit', '$nama_penyakit')");
+        $insert = $this->_db->insert("INSERT INTO tb_penyakit(kode_penyakit, penyakit, solusi, bobot) values ('$kode_penyakit', '$nama_penyakit', '$solusi', '$bobot')");
         if ($insert) {
             $res['status'] = 1;
             $res['msg'] = "Data penyakit berhasil ditambahkan";
@@ -63,7 +63,6 @@ class Penyakit
     }
     public function ubahPenyakit($kode)
     {
-        $data['role'] = (session_get('type') == 1) ? 'Admin' : 'Pakar';
         $data['penyakit'] = $this->_db->other_query("SELECT * FROM tb_penyakit WHERE kode_penyakit = '$kode'");
         view('layouts/_head');
         view('penyakit/ubah_data', $data);
@@ -74,8 +73,10 @@ class Penyakit
         $input = post();
         $kode_penyakit = $input['kode_penyakit'];
         $nama_penyakit = $input['penyakit'];
+        $solusi = $input['solusi'];
+        $bobot = $input['bobot'];
         // query update
-        $update = $this->_db->edit("UPDATE tb_penyakit SET penyakit = '$nama_penyakit' WHERE kode_penyakit = '$kode_penyakit'");
+        $update = $this->_db->edit("UPDATE tb_penyakit SET penyakit = '$nama_penyakit', solusi = '$solusi', bobot = '$bobot' WHERE kode_penyakit = '$kode_penyakit'");
         if ($update) {
             $res['status'] = 1;
             $res['msg'] = "Data penyakit berhasil diubah";

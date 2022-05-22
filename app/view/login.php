@@ -42,7 +42,7 @@
                                     <div class="auth-form-wrapper px-4 py-5">
                                         <a href="<?= url('/') ?>" class="noble-ui-logo d-block mb-2">SISPAK MOORA</a>
                                         <h5 class="text-muted font-weight-normal mb-4">Selamat Datang, Silakan masukan email dan password</h5>
-                                        <form class="forms-sample" id="formLogin">
+                                        <form class="forms-sample" id="formLogin" autocomplete="off">
                                             <div class="form-group">
                                                 <label for="email">Alamat email</label>
                                                 <input type="email" class="form-control" id="email" name="email" placeholder="Email">
