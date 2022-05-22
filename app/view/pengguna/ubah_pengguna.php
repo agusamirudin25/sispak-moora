@@ -22,8 +22,9 @@
                             <div class="col-sm-9">
                                 <select name="tipe" id="tipe" required>
                                     <option value="">Pilih</option>
-                                    <option <?= $pengguna->tipe == 1 ? 'selected' : null ?> value="1">Admin</option>
-                                    <option <?= $pengguna->tipe == 2 ? 'selected' : null ?> value="2">Pakar</option>
+                                    <?php foreach($role as $row) : ?>
+                                        <option <?= $pengguna->tipe == $row['id'] ? 'selected' : null ?> value="<?= $row['id'] ?>"><?= $row['role'] ?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                         </div>

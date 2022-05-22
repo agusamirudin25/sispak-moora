@@ -20,10 +20,11 @@
                         <div class="form-group row">
                             <label for="tipe" class="col-sm-3 col-form-label">Tipe</label>
                             <div class="col-sm-9">
-                                <select name="tipe" id="tipe" required>
+                                <select name="tipe" id="tipe" required class="form-control">
                                     <option value="">Pilih</option>
-                                    <option value="1">Admin</option>
-                                    <option value="2">Pakar</option>
+                                    <?php foreach($role as $row) : ?>
+                                        <option value="<?= $row['id'] ?>"><?= $row['role'] ?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                         </div>
