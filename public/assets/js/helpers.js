@@ -3,7 +3,7 @@ function success_alert(title, msg, page) {
         icon: 'success',
         title: title,
         text: msg,
-        timer: 1500,
+        timer: 3500,
         footer: '',
         showCancelButton: false,
         showConfirmButton: false

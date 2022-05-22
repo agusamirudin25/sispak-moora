@@ -3,28 +3,28 @@
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h6 class="card-title">Data Solusi</h6>
-                    <a href="<?= base_url('Solusi/tambahSolusi') ?>" class="btn btn-primary">Tambah Data</a>
+                    <h6 class="card-title">Data Pengetahuan</h6>
+                    <a href="<?= base_url('Pengetahuan/tambahPengetahuan') ?>" class="btn btn-primary">Tambah Data</a>
                     <div class="table-responsive mt-4">
                         <table id="table" class="table">
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Kode Solusi</th>
-                                    <th>Nama Solusi</th>
+                                    <th>Penyakit</th>
+                                    <th>Gejala</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $no = 1; ?>
-                                <?php foreach($solusi as $row): ?>
+                                <?php $i = 1; ?>
+                                <?php foreach($pengetahuan as $row): ?>
                                 <tr>
-                                    <td><?= $no++ ?></td>
-                                    <td><?= $row['kode_solusi'] ?></td>
-                                    <td><?= $row['solusi'] ?></td>
+                                    <td><?= $i++ ?></td>
+                                    <td><?= $row['penyakit'] ?></td>
+                                    <td><?= $row['gejala'] ?></td>
                                     <td>
-                                        <a href="<?= base_url('Solusi/ubahSolusi/' . $row['kode_solusi']) ?>" class="btn btn-warning">Edit</a>
-                                        <a href="#" onclick="delete_data('<?= $row['kode_solusi'] ?>', 'Solusi/hapusSolusi')" role="button" class="btn btn-danger">Delete</a>
+                                        <a href="<?= base_url('Pengetahuan/ubahPengetahuan/' . $row['id']) ?>" class="btn btn-warning">Edit</a>
+                                        <a href="#" onclick="delete_data('<?= $row['id'] ?>', 'Pengetahuan/hapusPengetahuan')" role="button" class="btn btn-danger">Delete</a>
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>

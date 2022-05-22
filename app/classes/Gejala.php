@@ -19,7 +19,6 @@ class Gejala
 
     public function index()
     {
-        $data['role'] = (session_get('type') == 1) ? 'Admin' : 'Pakar';
         $data['gejala'] = $this->_db->other_query("SELECT * FROM tb_gejala", 2);
         view('layouts/_head');
         view('gejala/index', $data);
@@ -28,7 +27,6 @@ class Gejala
 
     public function tambahGejala()
     {
-        $data['role'] = (session_get('type') == 1) ? 'Admin' : 'Pakar';
         $kode_terakhir = $this->_db->get_last_param('tb_gejala', 'kode_gejala');
         if ($kode_terakhir) {
             $nilai_kode = substr($kode_terakhir['kode_gejala'], 1);
@@ -64,7 +62,6 @@ class Gejala
     }
     public function ubahGejala($kode)
     {
-        $data['role'] = (session_get('type') == 1) ? 'Admin' : 'Pakar';
         $data['gejala'] = $this->_db->other_query("SELECT * FROM tb_gejala WHERE kode_gejala = '$kode'");
         view('layouts/_head');
         view('gejala/ubah_data', $data);

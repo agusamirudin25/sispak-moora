@@ -9,7 +9,6 @@
                         <table id="table" class="table">
                             <thead>
                                 <tr>
-                                    <th>No</th>
                                     <th>Kode Gejala</th>
                                     <th>Nama Gejala</th>
                                     <th>Bobot</th>
@@ -17,10 +16,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $no = 1; ?>
                                 <?php foreach($gejala as $row): ?>
                                 <tr>
-                                    <td><?= $no++ ?></td>
                                     <td><?= $row['kode_gejala'] ?></td>
                                     <td><?= $row['gejala'] ?></td>
                                     <td><?= $row['bobot'] ?></td>

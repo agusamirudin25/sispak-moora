@@ -33,7 +33,7 @@
         <nav class="sidebar">
             <div class="sidebar-header">
                 <a href="#" class="sidebar-brand">
-                    Sispak
+                    SISPAK
                 </a>
                 <div class="sidebar-toggler not-active">
                     <span></span>
@@ -46,55 +46,117 @@
             ?>
             <div class="sidebar-body">
                 <ul class="nav">
-                    <li class="nav-item <?= $uri[2] == 'Dashboard' ? 'active' : '' ?>">
-                        <a href="<?= base_url('Dashboard') ?>" class="nav-link">
-                            <i class="link-icon" data-feather="box"></i>
-                            <span class="link-title">Dashboard</span>
-                        </a>
-                    </li>
+                    <?php if (session_get('type') == 1) : ?>
+                        <li class="nav-item <?= $uri[2] == 'Dashboard' ? 'active' : '' ?>">
+                            <a href="<?= base_url('Dashboard') ?>" class="nav-link">
+                                <i class="link-icon" data-feather="box"></i>
+                                <span class="link-title">Dashboard</span>
+                            </a>
+                        </li>
 
-                    <li class="nav-item <?= $uri[2] == 'Pengguna' ? 'active' : '' ?>">
-                        <a href="<?= base_url('Pengguna') ?>" class="nav-link">
-                            <i class="link-icon" data-feather="user"></i>
-                            <span class="link-title">Data Pengguna</span>
-                        </a>
-                    </li>
-                    <li class="nav-item <?= $uri[2] == 'Penyakit' || $uri[2] == 'penyakit' ? 'active' : '' ?>">
-                        <a href="<?= base_url('Penyakit') ?>" class="nav-link">
-                            <i class="link-icon" data-feather="aperture"></i>
-                            <span class="link-title">Data Penyakit</span>
-                        </a>
-                    </li>
-                    <li class="nav-item <?= $uri[2] == 'Gejala' || $uri[2] == 'gejala' ? 'active' : '' ?>">
-                        <a href="<?= base_url('Gejala') ?>" class="nav-link">
-                            <i class="link-icon" data-feather="crosshair"></i>
-                            <span class="link-title">Data Gejala</span>
-                        </a>
-                    </li>
-                    <li class="nav-item <?= $uri[2] == 'Solusi' || $uri[2] == 'solusi' ? 'active' : '' ?>">
-                        <a href="<?= base_url('Solusi') ?>" class="nav-link">
-                            <i class="link-icon" data-feather="share-2"></i>
-                            <span class="link-title">Data Solusi</span>
-                        </a>
-                    </li>
-                    <li class="nav-item <?= $uri[2] == 'Konsultasi' || $uri[2] == 'konsultasi' ? 'active' : '' ?>">
-                        <a href="<?= base_url('Konsultasi') ?>" class="nav-link">
-                            <i class="link-icon" data-feather="wind"></i>
-                            <span class="link-title">Konsultasi</span>
-                        </a>
-                    </li>
-                    <li class="nav-item <?= $uri[2] == 'Diagnosis' || $uri[2] == 'Diagnosis' ? 'active' : '' ?>">
-                        <a href="<?= base_url('Diagnosis') ?>" class="nav-link">
-                            <i class="link-icon" data-feather="grid"></i>
-                            <span class="link-title">Diagnosis</span>
-                        </a>
-                    </li>
-                    <li class="nav-item <?= $uri[2] == 'Laporan' || $uri[2] == 'Laporan' ? 'active' : '' ?>">
-                        <a href="<?= base_url('Laporan') ?>" class="nav-link">
-                            <i class="link-icon" data-feather="book"></i>
-                            <span class="link-title">Laporan</span>
-                        </a>
-                    </li>
+                        <li class="nav-item <?= $uri[2] == 'Pengguna' ? 'active' : '' ?>">
+                            <a href="<?= base_url('Pengguna') ?>" class="nav-link">
+                                <i class="link-icon" data-feather="user"></i>
+                                <span class="link-title">Data Pengguna</span>
+                            </a>
+                        </li>
+                        <li class="nav-item <?= $uri[2] == 'Penyakit' || $uri[2] == 'penyakit' ? 'active' : '' ?>">
+                            <a href="<?= base_url('Penyakit') ?>" class="nav-link">
+                                <i class="link-icon" data-feather="aperture"></i>
+                                <span class="link-title">Data Penyakit</span>
+                            </a>
+                        </li>
+                        <li class="nav-item <?= $uri[2] == 'Gejala' || $uri[2] == 'gejala' ? 'active' : '' ?>">
+                            <a href="<?= base_url('Gejala') ?>" class="nav-link">
+                                <i class="link-icon" data-feather="crosshair"></i>
+                                <span class="link-title">Data Gejala</span>
+                            </a>
+                        </li>
+                        <li class="nav-item <?= $uri[2] == 'Diagnosis' || $uri[2] == 'Diagnosis' ? 'active' : '' ?>">
+                            <a href="<?= base_url('Diagnosis') ?>" class="nav-link">
+                                <i class="link-icon" data-feather="grid"></i>
+                                <span class="link-title">Diagnosa</span>
+                            </a>
+                        </li>
+                        <li class="nav-item <?= $uri[2] == 'Konsultasi' || $uri[2] == 'konsultasi' ? 'active' : '' ?>">
+                            <a href="<?= base_url('Konsultasi') ?>" class="nav-link">
+                                <i class="link-icon" data-feather="wind"></i>
+                                <span class="link-title">Konsultasi</span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" data-toggle="collapse" href="#laporan" role="button" aria-expanded="false" aria-controls="laporan">
+                                <i class="link-icon" data-feather="book"></i>
+                                <span class="link-title">Laporan</span>
+                                <i class="link-arrow" data-feather="chevron-down"></i>
+                            </a>
+                            <div class="collapse " id="laporan">
+                                <ul class="nav sub-menu">
+                                    <li class="nav-item">
+                                        <a href="<?= base_url('Laporan/tahunan') ?>" class="nav-link ">Laporan Tahunan</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="<?= base_url('Laporan/bulanan') ?>" class="nav-link ">Laporan Bulanan</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    <?php endif; ?>
+
+                    <?php if (session_get('type') == 2) : ?>
+                        <li class="nav-item <?= $uri[2] == 'Dashboard' ? 'active' : '' ?>">
+                            <a href="<?= base_url('Dashboard') ?>" class="nav-link">
+                                <i class="link-icon" data-feather="box"></i>
+                                <span class="link-title">Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="nav-item <?= $uri[2] == 'Pengetahuan' ? 'active' : '' ?>">
+                            <a href="<?= base_url('Pengetahuan') ?>" class="nav-link">
+                                <i class="link-icon" data-feather="archive"></i>
+                                <span class="link-title">Pengetahuan</span>
+                            </a>
+                        </li>
+                        <li class="nav-item <?= $uri[2] == 'Konsultasi' || $uri[2] == 'konsultasi' ? 'active' : '' ?>">
+                            <a href="<?= base_url('Konsultasi') ?>" class="nav-link">
+                                <i class="link-icon" data-feather="wind"></i>
+                                <span class="link-title">Konsultasi</span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" data-toggle="collapse" href="#laporan" role="button" aria-expanded="false" aria-controls="laporan">
+                                <i class="link-icon" data-feather="book"></i>
+                                <span class="link-title">Laporan</span>
+                                <i class="link-arrow" data-feather="chevron-down"></i>
+                            </a>
+                            <div class="collapse " id="laporan">
+                                <ul class="nav sub-menu">
+                                    <li class="nav-item">
+                                        <a href="<?= base_url('Laporan/tahunan') ?>" class="nav-link ">Laporan Tahunan</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="<?= base_url('Laporan/bulanan') ?>" class="nav-link ">Laporan Bulanan</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    <?php endif; ?>
+
+                    <?php if (session_get('type') == 3) : ?>
+                        <li class="nav-item <?= $uri[2] == 'Diagnosis' || $uri[2] == 'Diagnosis' ? 'active' : '' ?>">
+                            <a href="<?= base_url('Diagnosis') ?>" class="nav-link">
+                                <i class="link-icon" data-feather="grid"></i>
+                                <span class="link-title">Diagnosa</span>
+                            </a>
+                        </li>
+                        <li class="nav-item <?= $uri[2] == 'Konsultasi' || $uri[2] == 'konsultasi' ? 'active' : '' ?>">
+                            <a href="<?= base_url('Konsultasi') ?>" class="nav-link">
+                                <i class="link-icon" data-feather="wind"></i>
+                                <span class="link-title">Konsultasi</span>
+                            </a>
+                        </li>
+                    <?php endif; ?>
+
+
                     <li class="nav-item">
                         <a href="<?= base_url('Auth/logout') ?>" class="nav-link">
                             <i class="link-icon" data-feather="log-out"></i>

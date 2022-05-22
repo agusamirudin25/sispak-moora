@@ -3,18 +3,28 @@
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h6 class="card-title">Tambah Solusi</h6>
+                    <h6 class="card-title">Tambah Pengetahuan</h6>
                     <form class="forms-sample" autocomplete="off" id="formTambah">
                         <div class="form-group row">
-                            <label for="kode_solusi" class="col-sm-3 col-form-label">Kode Solusi</label>
+                            <label for="penyakit" class="col-sm-3 col-form-label">Penyakit</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="kode_solusi" readonly value="<?= $kode_otomatis ?>" placeholder="Kode Solusi" name="kode_solusi" required>
+                                <select name="penyakit" id="penyakit" required class="form-control">
+                                    <option value="">-Pilih Penyakit-</option>
+                                    <?php foreach($penyakit as $row) : ?>
+                                    <option value="<?= $row['kode_penyakit'] ?>"><?= $row['penyakit'] ?></option>
+                                    <?php endforeach; ?>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="solusi" class="col-sm-3 col-form-label">Solusi</label>
+                            <label for="gejala" class="col-sm-3 col-form-label">Gejala</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="solusi" placeholder="solusi" name="solusi" required>
+                                <select name="gejala" id="gejala" required class="form-control">
+                                    <option value="">-Pilih Gejala-</option>
+                                    <?php foreach($gejala as $row) : ?>
+                                    <option value="<?= $row['kode_gejala'] ?>"><?= $row['gejala'] ?></option>
+                                    <?php endforeach; ?>
+                                </select>
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary mr-2">Simpan</button>
@@ -35,7 +45,7 @@
             e.preventDefault();
             var data = new FormData(this);
             $.ajax({
-                url: '<?= url(); ?>Solusi/prosesTambahSolusi',
+                url: '<?= url(); ?>Pengetahuan/prosesTambahPengetahuan',
                 type: "post",
                 data: data,
                 processData: false,

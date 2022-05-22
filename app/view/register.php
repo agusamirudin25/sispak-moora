@@ -33,29 +33,31 @@
                     <div class="col-md-10 col-xl-8 mx-auto">
                         <div class="card">
                             <div class="row">
-                                <div class="col-md-6 pr-md-0">
-                                    <div class="auth-left-wrapper" style="background-image: url(assets/images/login.png)">
-
-                                    </div>
-                                </div>
                                 <div class="col-md-6 pl-md-0">
                                     <div class="auth-form-wrapper px-4 py-5">
-                                        <a href="<?= url('/') ?>" class="noble-ui-logo d-block mb-2"><?= ($title) ?? 'Sistem Pakar MOORA' ?></a>
-                                        <h5 class="text-muted font-weight-normal mb-4">Selamat Datang, Silakan masukan email dan password</h5>
-                                        <form class="forms-sample" id="formLogin" autocomplete="off">
+                                        <a href="#" class="noble-ui-logo d-block mb-2"><?= ($title) ?? 'Sistem Pakar MOORA' ?></a>
+                                        <form class="forms-sample" id="formRegister" autocomplete="off">
+                                            <div class="form-group">
+                                                <label for="nama_lengkap">Nama Lengkap</label>
+                                                <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap" placeholder="Nama Lengkap Anda">
+                                            </div>
                                             <div class="form-group">
                                                 <label for="email">Alamat email</label>
-                                                <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+                                                <input type="email" class="form-control" id="email" name="email" placeholder="Email Anda">
                                             </div>
                                             <div class="form-group">
                                                 <label for="password">Password</label>
-                                                <input type="password" class="form-control" id="password" name="password" autocomplete="password anda" placeholder="Password">
+                                                <input type="password" class="form-control" id="password" name="password" placeholder="Password Anda">
                                             </div>
                                             <div class="mt-3">
-                                                <button type="submit" class="btn btn-primary mr-2 mb-2 mb-md-0">Login</button>
+                                                <button type="submit" class="btn btn-primary mr-2 mb-2 mb-md-0">Registrasi</button>
                                             </div>
-                                            <a href="<?= url('/auth/register') ?>" class="d-block mt-3 text-muted">Belum punya akun? Registrasi</a>
+                                            <a href="<?= url('/auth') ?>" class="d-block mt-3 text-muted">Sudah Punya akun? Login</a>
                                         </form>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 pr-md-0">
+                                    <div class="auth-left-wrapper" style="background-image: url(<?= url('assets/images/login.png') ?>)">
                                     </div>
                                 </div>
                             </div>
@@ -80,13 +82,19 @@
 
     <script>
         const BASE_URL = "<?= base_url() ?>";
-        $('#formLogin').submit(function(e) {
+        $('#formRegister').submit(function(e) {
             e.preventDefault();
             let user = $('#email').val();
+            let nama = $('#nama_lengkap').val();
             let pass = $('#password').val();
             if (user.length == 0) {
                 error_alert('Error', 'Email tidak boleh kosong')
                 $("#email").focus();
+                return false;
+            }
+            if (nama.length == 0) {
+                error_alert('Error', 'Nama Lenngkap tidak boleh kosong')
+                $("#nama_lengkap").focus();
                 return false;
             }
             if (pass.length == 0) {
@@ -95,7 +103,7 @@
                 return false;
             }
             $.ajax({
-                url: '<?= url() ?>Auth/cek_login',
+                url: '<?= url() ?>Auth/proses_register',
                 type: 'POST',
                 data: new FormData(this),
                 processData: false,
@@ -104,7 +112,7 @@
                 async: false,
                 dataType: "json",
                 success: function(data) {
-                    if (data.login_status == 1) {
+                    if (data.status == 1) {
                         success_alert("Berhasil", data.msg, BASE_URL + data.page);
                     } else {
                         error_alert("Gagal", data.msg);
