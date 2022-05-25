@@ -20,7 +20,7 @@
                                 <tr>
                                     <td><?= $row['kode_penyakit'] ?></td>
                                     <td><?= $row['penyakit'] ?></td>
-                                    <td><?= $row['solusi'] ?? '-' ?></td>
+                                    <td style="white-space:normal;"><?= $row['solusi'] ?? '-' ?></td>
                                     <td>
                                         <a href="<?= base_url('Penyakit/ubahPenyakit/' . $row['kode_penyakit']) ?>" class="btn btn-warning">Edit</a>
                                         <a href="#" onclick="delete_data('<?= $row['kode_penyakit'] ?>', 'Penyakit/hapusPenyakit')" role="button" class="btn btn-danger">Delete</a>
