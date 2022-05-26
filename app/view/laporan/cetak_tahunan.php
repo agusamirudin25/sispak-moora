@@ -1,4 +1,4 @@
-<link href="http://localhost:8000/css/app.css" rel="stylesheet" />
+<link href="<?= base_url() ?>assets/css/app.css" rel="stylesheet" />
 <body>
     <div class="container" style="margin-top: 15rem;">
         <h2 style="text-align: center;">Laporan Tahun <?= $tahun ?></h2>
