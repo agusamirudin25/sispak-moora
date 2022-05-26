@@ -44,13 +44,38 @@ class Laporan
         view('laporan/cetak_tahunan', $data);
     }
 
-    public function generate()
+    public function bulanan()
     {
-        $pdf = new \FPDF();
-        $pdf->AddPage();
-        $pdf->SetFont('Arial', 'B', 16);
-        $pdf->Image(FCPATH . 'assets/images/kop.png', -2, -3, 220);
-        $pdf->Cell(40, 10, 'Hello World!');
-        $pdf->Output();
+        $tahun = $_GET['tahun'] ?? null;
+        $bulan = $_GET['bulan'] ?? null;
+        $link_cetak = 'laporan/cetak_bulanan';
+        $query = "SELECT tb_diagnosis.*, tb_pengguna.nama_lengkap, tb_penyakit.penyakit as nama_penyakit FROM tb_diagnosis JOIN tb_pengguna ON tb_diagnosis.email = tb_pengguna.email JOIN tb_penyakit ON tb_diagnosis.penyakit = tb_penyakit.kode_penyakit";
+        if($tahun != null && $bulan != null) {
+            $query .= " WHERE YEAR(tb_diagnosis.created_at) = $tahun";
+            $query .= " AND MONTH(tb_diagnosis.created_at) = $bulan";
+            $link_cetak .= "?tahun=$tahun&bulan=$bulan";
+        }
+        $data['diagnosis'] = $this->_db->other_query($query, 2);
+        $data['link_cetak'] = $link_cetak;
+        view('layouts/_head');
+        view('laporan/bulanan', $data);
+        view('layouts/_foot');
+    }
+
+    public function cetak_bulanan()
+    {
+        $tahun = $_GET['tahun'] ?? null;
+        $bulan = $_GET['bulan'] ?? null;
+        $link_cetak = 'laporan/cetak_bulanan';
+        $query = "SELECT tb_diagnosis.*, tb_pengguna.nama_lengkap, tb_penyakit.penyakit as nama_penyakit FROM tb_diagnosis JOIN tb_pengguna ON tb_diagnosis.email = tb_pengguna.email JOIN tb_penyakit ON tb_diagnosis.penyakit = tb_penyakit.kode_penyakit";
+        if($tahun != null && $bulan != null) {
+            $query .= " WHERE YEAR(tb_diagnosis.created_at) = $tahun";
+            $query .= " AND MONTH(tb_diagnosis.created_at) = $bulan";
+            $link_cetak .= "?tahun=$tahun&bulan=$bulan";
+        }
+        $data['diagnosis'] = $this->_db->other_query($query, 2);
+        $data['tahun'] = $tahun;
+        $data['bulan'] = bulan($bulan);
+        view('laporan/cetak_bulanan', $data);
     }
 }
