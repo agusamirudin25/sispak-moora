@@ -168,6 +168,10 @@
                     <i data-feather="menu"></i>
                 </a>
                 <div class="navbar-content">
+                    <div class="d-flex my-2">
+                        <a href="<?= base_url('dashboard/bantuan') ?>" class="btn btn-info text-white p-3 mr-2">Bantuan</a>
+                        <a href="<?= base_url('dashboard/tentang') ?>" class="btn btn-primary text-white p-3">Tentang</a>
+                    </div>
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown nav-profile">
                             <h5><?= session_get('nama') ?></h5>
