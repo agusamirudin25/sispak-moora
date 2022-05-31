@@ -57,25 +57,19 @@
                         <li class="nav-item <?= $uri[2] == 'Pengguna' ? 'active' : '' ?>">
                             <a href="<?= base_url('Pengguna') ?>" class="nav-link">
                                 <i class="link-icon" data-feather="user"></i>
-                                <span class="link-title">Data Pengguna</span>
+                                <span class="link-title">Kelola Data Pengguna</span>
                             </a>
                         </li>
                         <li class="nav-item <?= $uri[2] == 'Penyakit' || $uri[2] == 'penyakit' ? 'active' : '' ?>">
                             <a href="<?= base_url('Penyakit') ?>" class="nav-link">
                                 <i class="link-icon" data-feather="aperture"></i>
-                                <span class="link-title">Data Penyakit</span>
+                                <span class="link-title">Kelola Data Penyakit</span>
                             </a>
                         </li>
                         <li class="nav-item <?= $uri[2] == 'Gejala' || $uri[2] == 'gejala' ? 'active' : '' ?>">
                             <a href="<?= base_url('Gejala') ?>" class="nav-link">
                                 <i class="link-icon" data-feather="crosshair"></i>
-                                <span class="link-title">Data Gejala</span>
-                            </a>
-                        </li>
-                        <li class="nav-item <?= $uri[2] == 'Diagnosis' || $uri[2] == 'Diagnosis' ? 'active' : '' ?>">
-                            <a href="<?= base_url('Diagnosis') ?>" class="nav-link">
-                                <i class="link-icon" data-feather="grid"></i>
-                                <span class="link-title">Diagnosa</span>
+                                <span class="link-title">Kelola Data Gejala</span>
                             </a>
                         </li>
                         <li class="nav-item <?= $uri[2] == 'Konsultasi' || $uri[2] == 'konsultasi' ? 'active' : '' ?>">
