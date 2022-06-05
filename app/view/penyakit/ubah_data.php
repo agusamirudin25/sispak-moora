@@ -14,7 +14,7 @@
                         <div class="form-group row">
                             <label for="penyakit" class="col-sm-3 col-form-label">Nama Penyakit</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="penyakit" value="<?= $penyakit->penyakit ?>" placeholder="Penyakit" name="penyakit" required>
+                                <input type="text" class="form-control text-uppercase" id="penyakit" value="<?= $penyakit->penyakit ?>" placeholder="Penyakit" name="penyakit" required>
                             </div>
                         </div>
                         <div class="form-group row">

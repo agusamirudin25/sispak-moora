@@ -25,6 +25,14 @@ class Penyakit
         view('layouts/_foot');
     }
 
+    public function cariData($nama_table, $field)
+    {
+        $data['penyakit'] = $this->_db->other_query("SELECT * FROM {$nama_table} WHERE {$field} LIKE '%" . $_POST['cari'] . "%'", 2);
+        view('layouts/_head');
+        view('penyakit/index', $data);
+        view('layouts/_foot');
+    }
+
     public function tambahPenyakit()
     {
         $kode_terakhir = $this->_db->get_last_param('tb_penyakit', 'kode_penyakit');
@@ -45,9 +53,17 @@ class Penyakit
     {
         $input = post();
         $kode_penyakit = $input['kode_penyakit'];
-        $nama_penyakit = $input['penyakit'];
+        $nama_penyakit = strtoupper($input['penyakit']);
         $solusi = $input['solusi'];
         $bobot = $input['bobot'];
+        // cek nama_penyakit sudah ada atau belum
+        $cek_nama_penyakit = $this->_db->other_query("SELECT * FROM tb_penyakit WHERE penyakit = '{$nama_penyakit}'");
+        if ($cek_nama_penyakit) {
+            $res['status'] = 0;
+            $res['msg'] = "Nama penyakit sudah ada";
+            echo json_encode($res);
+            die;
+        }
 
         // query insert
         $insert = $this->_db->insert("INSERT INTO tb_penyakit(kode_penyakit, penyakit, solusi, bobot) values ('$kode_penyakit', '$nama_penyakit', '$solusi', '$bobot')");
@@ -72,9 +88,17 @@ class Penyakit
     {
         $input = post();
         $kode_penyakit = $input['kode_penyakit'];
-        $nama_penyakit = $input['penyakit'];
+        $nama_penyakit = strtoupper($input['penyakit']);
         $solusi = $input['solusi'];
         $bobot = $input['bobot'];
+        // cek nama_penyakit sudah ada atau belum
+        $cek_nama_penyakit = $this->_db->other_query("SELECT * FROM tb_penyakit WHERE penyakit = '{$nama_penyakit}' AND kode_penyakit != '{$kode_penyakit}'");
+        if ($cek_nama_penyakit) {
+            $res['status'] = 0;
+            $res['msg'] = "Nama penyakit sudah ada";
+            echo json_encode($res);
+            die;
+        }
         // query update
         $update = $this->_db->edit("UPDATE tb_penyakit SET penyakit = '$nama_penyakit', solusi = '$solusi', bobot = '$bobot' WHERE kode_penyakit = '$kode_penyakit'");
         if ($update) {
