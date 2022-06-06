@@ -5,7 +5,7 @@
                 <div class="card-body">
                     <h6 class="card-title">Ubah Pengetahuan</h6>
                     <form class="forms-sample" autocomplete="off" id="formUbah">
-                        <input type="hidden" name="id" value="<?= $pengetahuan->id ?>">
+                        <input type="hidden" name="id" value="<?= $pengetahuan->id_pengetahuan ?>">
                         <div class="form-group row">
                             <label for="penyakit" class="col-sm-3 col-form-label">Penyakit</label>
                             <div class="col-sm-9">

@@ -45,8 +45,16 @@ class Gejala
     {
         $input = post();
         $kode_gejala = $input['kode_gejala'];
-        $nama_gejala = $input['gejala'];
+        $nama_gejala = strtoupper($input['gejala']);
         $bobot = $input['bobot'];
+        // cek gejala sudah ada atau belum
+        $cek_nama_gejala = $this->_db->other_query("SELECT * FROM tb_gejala WHERE gejala = '{$nama_gejala}'");
+        if ($cek_nama_gejala) {
+            $res['status'] = 0;
+            $res['msg'] = "Nama gejala sudah ada";
+            echo json_encode($res);
+            die;
+        }
 
         // query insert
         $insert = $this->_db->insert("INSERT INTO tb_gejala(kode_gejala, gejala, bobot) values ('$kode_gejala', '$nama_gejala', '$bobot')");
@@ -71,8 +79,17 @@ class Gejala
     {
         $input = post();
         $kode_gejala = $input['kode_gejala'];
-        $nama_gejala = $input['gejala'];
+        $nama_gejala = strtoupper($input['gejala']);
         $bobot = $input['bobot'];
+        // cek gejala sudah ada atau belum
+        $cek_nama_gejala = $this->_db->other_query("SELECT * FROM tb_gejala WHERE gejala = '{$nama_gejala}' AND kode_gejala != '{$kode_gejala}'");
+        if ($cek_nama_gejala) {
+            $res['status'] = 0;
+            $res['msg'] = "Nama gejala sudah ada";
+            echo json_encode($res);
+            die;
+        }
+
         // query update
         $update = $this->_db->edit("UPDATE tb_gejala SET gejala = '$nama_gejala', bobot = '$bobot' WHERE kode_gejala = '$kode_gejala'");
         if ($update) {

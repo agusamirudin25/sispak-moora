@@ -14,7 +14,7 @@
                         <div class="form-group row">
                             <label for="gejala" class="col-sm-3 col-form-label">Nama Gejala</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="gejala" placeholder="gejala" name="gejala" required>
+                                <input type="text" class="form-control text-uppercase" id="gejala" placeholder="gejala" name="gejala" required>
                             </div>
                         </div>
                         <div class="form-group row">

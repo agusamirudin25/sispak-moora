@@ -29,7 +29,7 @@
                                             <td><?= $row['nama_lengkap'] ?></td>
                                         <?php endif; ?>
                                         <td>
-                                            <a href="<?= base_url('Konsultasi/detailKonsultasi/' . $row['id']) ?>" class="btn btn-warning">Lihat</a>
+                                            <a href="<?= base_url('Konsultasi/detailKonsultasi/' . $row['id_konsultasi']) ?>" class="btn btn-warning">Lihat</a>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>

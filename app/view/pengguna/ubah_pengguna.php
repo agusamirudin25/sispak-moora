@@ -23,7 +23,7 @@
                                 <select name="tipe" id="tipe" required>
                                     <option value="">Pilih</option>
                                     <?php foreach($role as $row) : ?>
-                                        <option <?= $pengguna->tipe == $row['id'] ? 'selected' : null ?> value="<?= $row['id'] ?>"><?= $row['role'] ?></option>
+                                        <option <?= $pengguna->tipe == $row['id_role'] ? 'selected' : null ?> value="<?= $row['id_role'] ?>"><?= $row['role'] ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>

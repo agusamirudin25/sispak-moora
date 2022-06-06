@@ -11,7 +11,7 @@
  Target Server Version : 100406
  File Encoding         : 65001
 
- Date: 22/05/2022 19:15:33
+ Date: 07/06/2022 00:30:28
 */
 
 SET NAMES utf8mb4;
@@ -22,19 +22,25 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_diagnosis`;
 CREATE TABLE `tb_diagnosis`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_diagnosis` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(128) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `data_gejala` varchar(128) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `penyakit` varchar(64) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `hasil_moora` varchar(64) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `created_at` datetime(0) NULL DEFAULT current_timestamp(0),
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+  PRIMARY KEY (`id_diagnosis`) USING BTREE,
+  INDEX `email`(`email`) USING BTREE,
+  INDEX `penyakit`(`penyakit`) USING BTREE,
+  CONSTRAINT `email` FOREIGN KEY (`email`) REFERENCES `tb_pengguna` (`email`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `penyakit` FOREIGN KEY (`penyakit`) REFERENCES `tb_penyakit` (`kode_penyakit`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_diagnosis
 -- ----------------------------
 INSERT INTO `tb_diagnosis` VALUES (1, 'nita@gmail.com', '[\"G26\",\"G27\",\"G28\",\"G29\"]', 'P09', '0.15859851314591', '2022-05-22 19:12:29');
+INSERT INTO `tb_diagnosis` VALUES (2, 'nita@gmail.com', '[\"G01\",\"G02\",\"G03\",\"G05\"]', 'P01', '0.11894888485943', '2022-05-22 19:21:56');
+INSERT INTO `tb_diagnosis` VALUES (3, 'nita@gmail.com', '[\"G01\",\"G02\",\"G03\",\"G05\"]', 'P01', '0.11894888485943', '2022-06-07 00:25:54');
 
 -- ----------------------------
 -- Table structure for tb_gejala
@@ -104,11 +110,13 @@ INSERT INTO `tb_gejala` VALUES ('G45', 'Volume darah yang keluar pada vagina san
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_hasil_moora`;
 CREATE TABLE `tb_hasil_moora`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_hasil_moora` int(11) NOT NULL AUTO_INCREMENT,
   `kode_penyakit` varchar(64) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `nilai_moora` varchar(64) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+  PRIMARY KEY (`id_hasil_moora`) USING BTREE,
+  INDEX `kode_penyakit`(`kode_penyakit`) USING BTREE,
+  CONSTRAINT `kode_penyakit` FOREIGN KEY (`kode_penyakit`) REFERENCES `tb_penyakit` (`kode_penyakit`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_hasil_moora
@@ -127,19 +135,22 @@ INSERT INTO `tb_hasil_moora` VALUES (11, 'P11', '0.0653');
 INSERT INTO `tb_hasil_moora` VALUES (12, 'P12', '0.1306');
 INSERT INTO `tb_hasil_moora` VALUES (13, 'P13', '0.0776');
 INSERT INTO `tb_hasil_moora` VALUES (14, 'P14', '0.0442');
+INSERT INTO `tb_hasil_moora` VALUES (15, 'P15', '0.0000');
 
 -- ----------------------------
 -- Table structure for tb_jawaban_konsultasi
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_jawaban_konsultasi`;
 CREATE TABLE `tb_jawaban_konsultasi`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_jawaban_konsultasi` int(11) NOT NULL AUTO_INCREMENT,
   `id_konsultasi` int(11) NULL DEFAULT NULL,
   `jawaban` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
   `pakar` int(1) NULL DEFAULT NULL,
   `created_at` datetime(0) NULL DEFAULT current_timestamp(0),
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+  PRIMARY KEY (`id_jawaban_konsultasi`) USING BTREE,
+  INDEX `jawaban_konsultasi`(`id_konsultasi`) USING BTREE,
+  CONSTRAINT `jawaban_konsultasi` FOREIGN KEY (`id_konsultasi`) REFERENCES `tb_konsultasi` (`id_konsultasi`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_jawaban_konsultasi
@@ -148,35 +159,47 @@ INSERT INTO `tb_jawaban_konsultasi` VALUES (1, 1, 'ya, ada apa?', 1, '2022-05-22
 INSERT INTO `tb_jawaban_konsultasi` VALUES (2, 1, 'jadi gini', 0, '2022-05-22 19:11:43');
 INSERT INTO `tb_jawaban_konsultasi` VALUES (3, 1, 'kenapa?', 1, '2022-05-22 19:11:50');
 INSERT INTO `tb_jawaban_konsultasi` VALUES (4, 1, 'saya bingung', 0, '2022-05-22 19:11:57');
+INSERT INTO `tb_jawaban_konsultasi` VALUES (5, 4, 'ya', 0, '2022-06-07 00:16:30');
+INSERT INTO `tb_jawaban_konsultasi` VALUES (6, 4, 'apa ?', 1, '2022-06-07 00:17:49');
+INSERT INTO `tb_jawaban_konsultasi` VALUES (7, 4, 'nggaa', 0, '2022-06-07 00:17:57');
 
 -- ----------------------------
 -- Table structure for tb_konsultasi
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_konsultasi`;
 CREATE TABLE `tb_konsultasi`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `email` varchar(64) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `id_konsultasi` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(128) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `pertanyaan` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
   `created_at` datetime(0) NULL DEFAULT current_timestamp(0),
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+  PRIMARY KEY (`id_konsultasi`) USING BTREE,
+  INDEX `mail`(`email`) USING BTREE,
+  CONSTRAINT `mail` FOREIGN KEY (`email`) REFERENCES `tb_pengguna` (`email`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_konsultasi
 -- ----------------------------
 INSERT INTO `tb_konsultasi` VALUES (1, 'nita@gmail.com', 'haloo pakar, saya mau bertanya', '2022-05-22 19:11:18');
+INSERT INTO `tb_konsultasi` VALUES (2, 'nita@gmail.com', 'tes tes', '2022-06-07 00:15:06');
+INSERT INTO `tb_konsultasi` VALUES (3, 'nita@gmail.com', 'tes tes', '2022-06-07 00:15:14');
+INSERT INTO `tb_konsultasi` VALUES (4, 'nita@gmail.com', 'tes tes', '2022-06-07 00:16:03');
 
 -- ----------------------------
 -- Table structure for tb_pengetahuan
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_pengetahuan`;
 CREATE TABLE `tb_pengetahuan`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_pengetahuan` int(11) NOT NULL AUTO_INCREMENT,
   `kode_penyakit` varchar(64) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `kode_gejala` varchar(64) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `created_at` datetime(1) NULL DEFAULT current_timestamp(1),
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 58 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+  PRIMARY KEY (`id_pengetahuan`) USING BTREE,
+  INDEX `kd_penyakit`(`kode_penyakit`) USING BTREE,
+  INDEX `kd_gejala`(`kode_gejala`) USING BTREE,
+  CONSTRAINT `kd_gejala` FOREIGN KEY (`kode_gejala`) REFERENCES `tb_gejala` (`kode_gejala`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `kd_penyakit` FOREIGN KEY (`kode_penyakit`) REFERENCES `tb_penyakit` (`kode_penyakit`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB AUTO_INCREMENT = 59 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_pengetahuan
@@ -250,7 +273,9 @@ CREATE TABLE `tb_pengguna`  (
   `status` int(1) NULL DEFAULT NULL,
   `created_at` datetime(0) NULL DEFAULT current_timestamp(0),
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
-  PRIMARY KEY (`email`) USING BTREE
+  PRIMARY KEY (`email`) USING BTREE,
+  INDEX `roles`(`tipe`) USING BTREE,
+  CONSTRAINT `roles` FOREIGN KEY (`tipe`) REFERENCES `tb_role` (`id_role`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -278,7 +303,7 @@ CREATE TABLE `tb_penyakit`  (
 -- ----------------------------
 -- Records of tb_penyakit
 -- ----------------------------
-INSERT INTO `tb_penyakit` VALUES ('P01', 'Infeksi Saluran Kemih', NULL, '0.06', 1, '2022-05-15 08:12:14', '2022-05-22 18:13:31');
+INSERT INTO `tb_penyakit` VALUES ('P01', 'Infeksi Saluran Kemih', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe repudiandae exercitationem cum, in ea quae quam laboriosam sint quidem assumenda facere error enim placeat quia inventore eveniet ad quisquam repellat maxime corporis? Voluptates rem dolor nobis ullam molestias a maiores.', '0.06', 1, '2022-05-15 08:12:14', '2022-05-25 13:34:34');
 INSERT INTO `tb_penyakit` VALUES ('P02', 'Maag', NULL, '0.06', 1, '2022-05-22 12:23:24', '2022-05-22 13:44:36');
 INSERT INTO `tb_penyakit` VALUES ('P03', 'Anemia', NULL, '0.06', 1, '2022-05-22 12:24:15', '2022-05-22 13:44:38');
 INSERT INTO `tb_penyakit` VALUES ('P04', 'Abortus', NULL, '0.06', 1, '2022-05-22 12:24:16', '2022-05-22 13:44:40');
@@ -292,16 +317,17 @@ INSERT INTO `tb_penyakit` VALUES ('P11', 'IntraUterine Growth Restriction (IUGR)
 INSERT INTO `tb_penyakit` VALUES ('P12', 'Pregnancy Induced Hypertension (Darah Tinggi)', NULL, '0.06', 1, '2022-05-22 12:27:53', '2022-05-22 12:29:59');
 INSERT INTO `tb_penyakit` VALUES ('P13', 'Diabetes Gestansional', NULL, '0.04', 1, '2022-05-22 12:27:56', '2022-05-22 12:29:59');
 INSERT INTO `tb_penyakit` VALUES ('P14', 'Blighted Ovum', NULL, '0.02', 1, '2022-05-22 12:28:16', '2022-05-22 12:29:59');
+INSERT INTO `tb_penyakit` VALUES ('P15', 'INFEKSI SALURAN KEMIHD', 'test', '0.02', 1, '2022-06-05 23:35:24', '2022-06-05 23:37:46');
 
 -- ----------------------------
 -- Table structure for tb_role
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_role`;
 CREATE TABLE `tb_role`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_role` int(11) NOT NULL AUTO_INCREMENT,
   `role` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `created_at` datetime(0) NULL DEFAULT current_timestamp(0),
-  PRIMARY KEY (`id`) USING BTREE
+  PRIMARY KEY (`id_role`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
