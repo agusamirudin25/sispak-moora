@@ -25,7 +25,8 @@ class Pengetahuan
     {
         $data['pengetahuan'] = $this->_db->other_query("SELECT tb_pengetahuan.id_pengetahuan, tb_pengetahuan.kode_gejala, tb_gejala.gejala, tb_pengetahuan.kode_penyakit, tb_penyakit.penyakit FROM tb_pengetahuan
         JOIN tb_gejala ON tb_pengetahuan.kode_gejala = tb_gejala.kode_gejala
-        JOIN tb_penyakit ON tb_pengetahuan.kode_penyakit = tb_penyakit.kode_penyakit", 2);
+        JOIN tb_penyakit ON tb_pengetahuan.kode_penyakit = tb_penyakit.kode_penyakit
+        WHERE tb_gejala.status = 1 AND tb_penyakit.status = 1", 2);
         view('layouts/_head');
         view('pengetahuan/index', $data);
         view('layouts/_foot');
@@ -33,8 +34,8 @@ class Pengetahuan
 
     public function tambahPengetahuan()
     {
-        $data['gejala'] = $this->_db->other_query("SELECT * FROM tb_gejala", 2);
-        $data['penyakit'] = $this->_db->other_query("SELECT * FROM tb_penyakit", 2);
+        $data['gejala'] = $this->_db->other_query("SELECT * FROM tb_gejala WHERE `status` = 1", 2);
+        $data['penyakit'] = $this->_db->other_query("SELECT * FROM tb_penyakit WHERE `status` = 1", 2);
         view('layouts/_head');
         view('pengetahuan/tambah_data', $data);
         view('layouts/_foot');
@@ -67,8 +68,8 @@ class Pengetahuan
     public function ubahPengetahuan($kode)
     {
         $data['pengetahuan'] = $this->_db->get("SELECT * FROM tb_pengetahuan WHERE id_pengetahuan = '$kode'");
-        $data['gejala'] = $this->_db->other_query("SELECT * FROM tb_gejala", 2);
-        $data['penyakit'] = $this->_db->other_query("SELECT * FROM tb_penyakit", 2);
+        $data['gejala'] = $this->_db->other_query("SELECT * FROM tb_gejala WHERE `status` = 1", 2);
+        $data['penyakit'] = $this->_db->other_query("SELECT * FROM tb_penyakit WHERE `status` = 1", 2);
         view('layouts/_head');
         view('pengetahuan/ubah_data', $data);
         view('layouts/_foot');

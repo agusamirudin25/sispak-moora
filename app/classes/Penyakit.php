@@ -55,7 +55,6 @@ class Penyakit
         $kode_penyakit = $input['kode_penyakit'];
         $nama_penyakit = strtoupper($input['penyakit']);
         $solusi = $input['solusi'];
-        $bobot = $input['bobot'];
         // cek nama_penyakit sudah ada atau belum
         $cek_nama_penyakit = $this->_db->other_query("SELECT * FROM tb_penyakit WHERE penyakit = '{$nama_penyakit}'");
         if ($cek_nama_penyakit) {
@@ -66,7 +65,7 @@ class Penyakit
         }
 
         // query insert
-        $insert = $this->_db->insert("INSERT INTO tb_penyakit(kode_penyakit, penyakit, solusi, bobot) values ('$kode_penyakit', '$nama_penyakit', '$solusi', '$bobot')");
+        $insert = $this->_db->insert("INSERT INTO tb_penyakit(kode_penyakit, penyakit, solusi, `status`) values ('$kode_penyakit', '$nama_penyakit', '$solusi', '0')");
         if ($insert) {
             $res['status'] = 1;
             $res['msg'] = "Data penyakit berhasil ditambahkan";
@@ -90,7 +89,6 @@ class Penyakit
         $kode_penyakit = $input['kode_penyakit'];
         $nama_penyakit = strtoupper($input['penyakit']);
         $solusi = $input['solusi'];
-        $bobot = $input['bobot'];
         // cek nama_penyakit sudah ada atau belum
         $cek_nama_penyakit = $this->_db->other_query("SELECT * FROM tb_penyakit WHERE penyakit = '{$nama_penyakit}' AND kode_penyakit != '{$kode_penyakit}'");
         if ($cek_nama_penyakit) {
@@ -100,7 +98,7 @@ class Penyakit
             die;
         }
         // query update
-        $update = $this->_db->edit("UPDATE tb_penyakit SET penyakit = '$nama_penyakit', solusi = '$solusi', bobot = '$bobot' WHERE kode_penyakit = '$kode_penyakit'");
+        $update = $this->_db->edit("UPDATE tb_penyakit SET penyakit = '$nama_penyakit', solusi = '$solusi' WHERE kode_penyakit = '$kode_penyakit'");
         if ($update) {
             $res['status'] = 1;
             $res['msg'] = "Data penyakit berhasil diubah";
@@ -111,6 +109,43 @@ class Penyakit
         }
         echo json_encode($res);
     }
+
+    public function lihatPenyakit()
+    {
+        $data['penyakit'] = $this->_db->other_query("SELECT * FROM tb_penyakit ORDER BY `status`", 2);
+        view('layouts/_head');
+        view('penyakit/verif', $data);
+        view('layouts/_foot');
+    }
+
+    public function verifikasiPenyakit($kode)
+    {
+        $data['penyakit'] = $this->_db->other_query("SELECT * FROM tb_penyakit WHERE kode_penyakit = '$kode'");
+        view('layouts/_head');
+        view('penyakit/verif_penyakit', $data);
+        view('layouts/_foot');
+    }
+
+    public function prosesVerifPenyakit()
+    {
+        $input = post();
+        $kode_penyakit = $input['kode_penyakit'];
+        $bobot = $input['bobot'];
+        $status = $input['status'];
+
+        // query update
+        $update = $this->_db->edit("UPDATE tb_penyakit SET bobot = '$bobot', `status` = '$status' WHERE kode_penyakit = '$kode_penyakit'");
+        if ($update) {
+            $res['status'] = 1;
+            $res['msg'] = "Data penyakit berhasil diverifikasi";
+            $res['page'] = "penyakit/lihatPenyakit";
+        } else {
+            $res['status'] = 0;
+            $res['msg'] = "Data penyakit gagal diverifikasi";
+        }
+        echo json_encode($res);
+    }
+
     public function hapusPenyakit()
     {
         $input = post();

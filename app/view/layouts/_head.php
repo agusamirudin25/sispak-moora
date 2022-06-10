@@ -104,6 +104,23 @@
                                 <span class="link-title">Dashboard</span>
                             </a>
                         </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" data-toggle="collapse" href="#validasi" role="button" aria-expanded="false" aria-controls="validasi">
+                                <i class="link-icon" data-feather="book"></i>
+                                <span class="link-title">Validasi</span>
+                                <i class="link-arrow" data-feather="chevron-down"></i>
+                            </a>
+                            <div class="collapse " id="validasi">
+                                <ul class="nav sub-menu">
+                                    <li class="nav-item">
+                                        <a href="<?= base_url('Gejala/lihatGejala') ?>" class="nav-link ">Data Gejala</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="<?= base_url('Penyakit/lihatPenyakit') ?>" class="nav-link ">Data Penyakit</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
                         <li class="nav-item <?= $uri[2] == 'Pengetahuan' ? 'active' : '' ?>">
                             <a href="<?= base_url('Pengetahuan') ?>" class="nav-link">
                                 <i class="link-icon" data-feather="archive"></i>

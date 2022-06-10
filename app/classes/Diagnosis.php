@@ -27,7 +27,7 @@ class Diagnosis
     public function index()
     {
         $data['role'] = (session_get('type') == 1) ? 'Admin' : 'Pakar';
-        $data['gejala'] = $this->_db->other_query("SELECT * FROM tb_gejala", 2);
+        $data['gejala'] = $this->_db->other_query("SELECT * FROM tb_gejala WHERE `status` = 1", 2);
         view('layouts/_head');
         view('diagnosis/index', $data);
         view('layouts/_foot');

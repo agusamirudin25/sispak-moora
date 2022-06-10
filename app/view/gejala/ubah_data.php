@@ -17,12 +17,6 @@
                                 <input type="text" class="form-control text-uppercase" id="gejala" value="<?= $gejala->gejala ?>" placeholder="gejala" name="gejala" required>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="bobot" class="col-sm-3 col-form-label">Nilai Bobot</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" id="bobot" value="<?= $gejala->bobot ?>" placeholder="bobot" name="bobot" required>
-                            </div>
-                        </div>
                         <button type="submit" class="btn btn-primary mr-2">Simpan</button>
                         <a href="javascript:history.back()" class="btn btn-light">Batal</a>
                     </form>

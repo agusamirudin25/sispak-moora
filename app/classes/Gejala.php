@@ -19,7 +19,7 @@ class Gejala
 
     public function index()
     {
-        $data['gejala'] = $this->_db->other_query("SELECT * FROM tb_gejala", 2);
+        $data['gejala'] = $this->_db->other_query("SELECT * FROM tb_gejala ORDER BY `status`", 2);
         view('layouts/_head');
         view('gejala/index', $data);
         view('layouts/_foot');
@@ -46,7 +46,6 @@ class Gejala
         $input = post();
         $kode_gejala = $input['kode_gejala'];
         $nama_gejala = strtoupper($input['gejala']);
-        $bobot = $input['bobot'];
         // cek gejala sudah ada atau belum
         $cek_nama_gejala = $this->_db->other_query("SELECT * FROM tb_gejala WHERE gejala = '{$nama_gejala}'");
         if ($cek_nama_gejala) {
@@ -57,7 +56,7 @@ class Gejala
         }
 
         // query insert
-        $insert = $this->_db->insert("INSERT INTO tb_gejala(kode_gejala, gejala, bobot) values ('$kode_gejala', '$nama_gejala', '$bobot')");
+        $insert = $this->_db->insert("INSERT INTO tb_gejala(kode_gejala, gejala, `status`) values ('$kode_gejala', '$nama_gejala', '0')");
         if ($insert) {
             $res['status'] = 1;
             $res['msg'] = "Data gejala berhasil ditambahkan";
@@ -80,7 +79,6 @@ class Gejala
         $input = post();
         $kode_gejala = $input['kode_gejala'];
         $nama_gejala = strtoupper($input['gejala']);
-        $bobot = $input['bobot'];
         // cek gejala sudah ada atau belum
         $cek_nama_gejala = $this->_db->other_query("SELECT * FROM tb_gejala WHERE gejala = '{$nama_gejala}' AND kode_gejala != '{$kode_gejala}'");
         if ($cek_nama_gejala) {
@@ -91,7 +89,7 @@ class Gejala
         }
 
         // query update
-        $update = $this->_db->edit("UPDATE tb_gejala SET gejala = '$nama_gejala', bobot = '$bobot' WHERE kode_gejala = '$kode_gejala'");
+        $update = $this->_db->edit("UPDATE tb_gejala SET gejala = '$nama_gejala' WHERE kode_gejala = '$kode_gejala'");
         if ($update) {
             $res['status'] = 1;
             $res['msg'] = "Data gejala berhasil diubah";
@@ -102,6 +100,43 @@ class Gejala
         }
         echo json_encode($res);
     }
+
+    public function lihatGejala()
+    {
+        $data['gejala'] = $this->_db->other_query("SELECT * FROM tb_gejala ORDER BY `status`", 2);
+        view('layouts/_head');
+        view('gejala/verif', $data);
+        view('layouts/_foot');
+    }
+
+    public function verifikasiGejala($kode)
+    {
+        $data['gejala'] = $this->_db->other_query("SELECT * FROM tb_gejala WHERE kode_gejala = '$kode'");
+        view('layouts/_head');
+        view('gejala/verif_gejala', $data);
+        view('layouts/_foot');
+    }
+
+    public function prosesVerifGejala()
+    {
+        $input = post();
+        $kode_gejala = $input['kode_gejala'];
+        $bobot = $input['bobot'];
+        $status = $input['status'];
+
+        // query update
+        $update = $this->_db->edit("UPDATE tb_gejala SET bobot = '$bobot', `status` = '$status' WHERE kode_gejala = '$kode_gejala'");
+        if ($update) {
+            $res['status'] = 1;
+            $res['msg'] = "Data gejala berhasil diverifikasi";
+            $res['page'] = "gejala/lihatGejala";
+        } else {
+            $res['status'] = 0;
+            $res['msg'] = "Data gejala gagal diverifikasi";
+        }
+        echo json_encode($res);
+    }
+
     public function hapusGejala()
     {
         $input = post();

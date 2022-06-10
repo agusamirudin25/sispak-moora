@@ -3,12 +3,12 @@
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h6 class="card-title">Data Gejala</h6>
-                    <a href="<?= base_url('Gejala/tambahGejala') ?>" class="btn btn-primary">Tambah Data</a>
+                    <h6 class="card-title">Verifikasi Data Gejala</h6>
                     <div class="table-responsive mt-4">
                         <table id="table" class="table">
                             <thead>
                                 <tr>
+                                    <th>No</th>
                                     <th>Kode Gejala</th>
                                     <th>Nama Gejala</th>
                                     <th>Bobot</th>
@@ -17,7 +17,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach($gejala as $row): 
+                                <?php 
+                                $no = 1;
+                                foreach($gejala as $row): 
                                 $statusVerif = ""; 
                                 if($row['status'] == 0){
                                     $statusVerif = '<span class="badge badge-info">Belum verifikasi</span>';
@@ -28,13 +30,13 @@
                                 }       
                                 ?>
                                 <tr>
+                                    <td><?= $no++ ?></td>
                                     <td><?= $row['kode_gejala'] ?></td>
-                                    <td><?= $row['gejala'] ?></td>
+                                    <td style="white-space: normal;"><?= $row['gejala'] ?></td>
                                     <td><?= $row['bobot'] ?? '-' ?></td>
                                     <td><?= $statusVerif ?></td>
                                     <td>
-                                        <a href="<?= base_url('Gejala/ubahGejala/' . $row['kode_gejala']) ?>" class="btn btn-warning">Edit</a>
-                                        <a href="#" onclick="delete_data('<?= $row['kode_gejala'] ?>', 'Gejala/hapusGejala')" role="button" class="btn btn-danger">Delete</a>
+                                        <a href="<?= base_url('Gejala/verifikasiGejala/' . $row['kode_gejala']) ?>" class="btn btn-warning text-white"><?= $row['status'] == 1 ? 'Edit' : 'Verifikasi' ?></a>
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>
