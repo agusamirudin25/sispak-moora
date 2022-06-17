@@ -33,7 +33,7 @@
         <nav class="sidebar">
             <div class="sidebar-header">
                 <a href="#" class="sidebar-brand">
-                    SISPAK
+                    <img src="<?php echo base_url() ?>assets/images/cover1.png" alt="" class="" style="width:100px; height:50px;">
                 </a>
                 <div class="sidebar-toggler not-active">
                     <span></span>
@@ -72,12 +72,7 @@
                                 <span class="link-title">Kelola Data Gejala</span>
                             </a>
                         </li>
-                        <li class="nav-item <?= $uri[2] == 'Konsultasi' || $uri[2] == 'konsultasi' ? 'active' : '' ?>">
-                            <a href="<?= base_url('Konsultasi') ?>" class="nav-link">
-                                <i class="link-icon" data-feather="wind"></i>
-                                <span class="link-title">Konsultasi</span>
-                            </a>
-                        </li>
+
                         <li class="nav-item ">
                             <a class="nav-link" data-toggle="collapse" href="#laporan" role="button" aria-expanded="false" aria-controls="laporan">
                                 <i class="link-icon" data-feather="book"></i>
@@ -107,7 +102,7 @@
                         <li class="nav-item ">
                             <a class="nav-link" data-toggle="collapse" href="#validasi" role="button" aria-expanded="false" aria-controls="validasi">
                                 <i class="link-icon" data-feather="book"></i>
-                                <span class="link-title">Validasi</span>
+                                <span class="link-title">Verifikasi</span>
                                 <i class="link-arrow" data-feather="chevron-down"></i>
                             </a>
                             <div class="collapse " id="validasi">
@@ -131,6 +126,7 @@
                             <a href="<?= base_url('Konsultasi') ?>" class="nav-link">
                                 <i class="link-icon" data-feather="wind"></i>
                                 <span class="link-title">Konsultasi</span>
+                                <span class="badge badge-danger" style="margin-left: 7em;" id="notif-menu">0</span>
                             </a>
                         </li>
                         <li class="nav-item ">
@@ -163,13 +159,14 @@
                             <a href="<?= base_url('Konsultasi') ?>" class="nav-link">
                                 <i class="link-icon" data-feather="wind"></i>
                                 <span class="link-title">Konsultasi</span>
+                                <span class="badge badge-danger" style="margin-left: 7em;" id="notif-menu">0</span>
                             </a>
                         </li>
                     <?php endif; ?>
 
 
                     <li class="nav-item">
-                        <a href="<?= base_url('Auth/logout') ?>" class="nav-link">
+                        <a href="javascript:void(0)" onclick="alertConfirm('<?= base_url('Auth/logout') ?>', 'Apakah anda yakin akan keluar?')" class="nav-link">
                             <i class="link-icon" data-feather="log-out"></i>
                             <span class="link-title">Logout</span>
                         </a>
@@ -186,13 +183,35 @@
                 </a>
                 <div class="navbar-content">
                     <div class="d-flex my-2">
-                        <a href="<?= base_url('dashboard/bantuan') ?>" class="btn btn-info text-white p-3 mr-2">Bantuan</a>
-                        <a href="<?= base_url('dashboard/tentang') ?>" class="btn btn-primary text-white p-3">Tentang</a>
+                        <a href="<?= base_url('dashboard/bantuan') ?>" class="btn btn-danger text-white p-3 mr-2">Bantuan</a>
+                        <a href="<?= base_url('dashboard/tentang') ?>" class="btn btn-danger text-white p-3">Tentang</a>
                     </div>
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown nav-profile">
                             <h5><?= session_get('nama') ?></h5>
                         </li>
+                        <?php if(session_get('type') != 1) : ?>
+                        <li class="nav-item dropdown nav-notifications">
+                            <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button">
+                                <i data-feather="bell"></i>
+                                <div class="indicator">
+                                    <div class="circle"></div>
+                                </div>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="notificationDropdown">
+                                <div class="dropdown-body">
+                                    <a href="<?= base_url('Konsultasi') ?>" class="dropdown-item">
+                                        <div class="icon">
+                                            <i data-feather="user-plus"></i>
+                                        </div>
+                                        <div class="content">
+                                            <p id="notif-header">0 Konsultasi</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                        <?php endif; ?>
                     </ul>
                 </div>
             </nav>

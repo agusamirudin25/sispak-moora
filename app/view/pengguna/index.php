@@ -11,7 +11,7 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Nama</th>
-                                    <th>Email</th>
+                                    <th>Username</th>
                                     <th>Tipe</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -22,11 +22,11 @@
                                 <tr>
                                     <td><?= $no++ ?></td>
                                     <td><?= $row['nama_lengkap'] ?></td>
-                                    <td><?= $row['email'] ?></td>
+                                    <td><?= $row['username'] ?></td>
                                     <td><?= $row['role'] ?></td>
                                     <td>
-                                        <a href="<?= base_url('Pengguna/ubahPengguna/' . $row['email']) ?>" class="btn btn-warning">Edit</a>
-                                        <a href="#" onclick="delete_data('<?= $row['email'] ?>', 'Pengguna/hapusPengguna')" role="button" class="btn btn-danger">Delete</a>
+                                        <a href="<?= base_url('Pengguna/ubahPengguna/' . $row['username']) ?>" class="btn btn-warning">Edit</a>
+                                        <a href="#" onclick="delete_data('<?= $row['username'] ?>', 'Pengguna/hapusPengguna')" role="button" class="btn btn-danger">Delete</a>
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>

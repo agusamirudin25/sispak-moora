@@ -20,7 +20,7 @@ class Laporan
     {
         $tahun = $_GET['tahun'] ?? null;
         $link_cetak = 'laporan/cetak_tahunan';
-        $query = "SELECT tb_diagnosis.*, tb_pengguna.nama_lengkap, tb_penyakit.penyakit as nama_penyakit FROM tb_diagnosis JOIN tb_pengguna ON tb_diagnosis.email = tb_pengguna.email JOIN tb_penyakit ON tb_diagnosis.penyakit = tb_penyakit.kode_penyakit";
+        $query = "SELECT tb_diagnosis.*, tb_pengguna.nama_lengkap, tb_penyakit.penyakit as nama_penyakit FROM tb_diagnosis JOIN tb_pengguna ON tb_diagnosis.username = tb_pengguna.username JOIN tb_penyakit ON tb_diagnosis.penyakit = tb_penyakit.kode_penyakit";
         if($tahun != null) {
             $query .= " WHERE YEAR(tb_diagnosis.created_at) = $tahun";
             $link_cetak .= "?tahun=$tahun";
@@ -35,7 +35,7 @@ class Laporan
     public function cetak_tahunan()
     {
         $tahun = $_GET['tahun'] ?? null;
-        $query = "SELECT tb_diagnosis.*, tb_pengguna.nama_lengkap, tb_penyakit.penyakit as nama_penyakit FROM tb_diagnosis JOIN tb_pengguna ON tb_diagnosis.email = tb_pengguna.email JOIN tb_penyakit ON tb_diagnosis.penyakit = tb_penyakit.kode_penyakit";
+        $query = "SELECT tb_diagnosis.*, tb_pengguna.nama_lengkap, tb_penyakit.penyakit as nama_penyakit FROM tb_diagnosis JOIN tb_pengguna ON tb_diagnosis.username = tb_pengguna.username JOIN tb_penyakit ON tb_diagnosis.penyakit = tb_penyakit.kode_penyakit";
         if($tahun != null) {
             $query .= " WHERE YEAR(tb_diagnosis.created_at) = $tahun";
         }
@@ -49,7 +49,7 @@ class Laporan
         $tahun = $_GET['tahun'] ?? null;
         $bulan = $_GET['bulan'] ?? null;
         $link_cetak = 'laporan/cetak_bulanan';
-        $query = "SELECT tb_diagnosis.*, tb_pengguna.nama_lengkap, tb_penyakit.penyakit as nama_penyakit FROM tb_diagnosis JOIN tb_pengguna ON tb_diagnosis.email = tb_pengguna.email JOIN tb_penyakit ON tb_diagnosis.penyakit = tb_penyakit.kode_penyakit";
+        $query = "SELECT tb_diagnosis.*, tb_pengguna.nama_lengkap, tb_penyakit.penyakit as nama_penyakit FROM tb_diagnosis JOIN tb_pengguna ON tb_diagnosis.username = tb_pengguna.username JOIN tb_penyakit ON tb_diagnosis.penyakit = tb_penyakit.kode_penyakit";
         if($tahun != null && $bulan != null) {
             $query .= " WHERE YEAR(tb_diagnosis.created_at) = $tahun";
             $query .= " AND MONTH(tb_diagnosis.created_at) = $bulan";
@@ -67,7 +67,7 @@ class Laporan
         $tahun = $_GET['tahun'] ?? null;
         $bulan = $_GET['bulan'] ?? null;
         $link_cetak = 'laporan/cetak_bulanan';
-        $query = "SELECT tb_diagnosis.*, tb_pengguna.nama_lengkap, tb_penyakit.penyakit as nama_penyakit FROM tb_diagnosis JOIN tb_pengguna ON tb_diagnosis.email = tb_pengguna.email JOIN tb_penyakit ON tb_diagnosis.penyakit = tb_penyakit.kode_penyakit";
+        $query = "SELECT tb_diagnosis.*, tb_pengguna.nama_lengkap, tb_penyakit.penyakit as nama_penyakit FROM tb_diagnosis JOIN tb_pengguna ON tb_diagnosis.username = tb_pengguna.username JOIN tb_penyakit ON tb_diagnosis.penyakit = tb_penyakit.kode_penyakit";
         if($tahun != null && $bulan != null) {
             $query .= " WHERE YEAR(tb_diagnosis.created_at) = $tahun";
             $query .= " AND MONTH(tb_diagnosis.created_at) = $bulan";

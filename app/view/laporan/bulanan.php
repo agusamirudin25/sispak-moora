@@ -6,7 +6,7 @@
                     <h6 class="card-title">Laporan Bulanan</h6>
                     <div class="card">
                         <div class="card-body">
-                            <h6 class="card-title">Filter</h6>
+                            <h6 class="card-title"></h6>
                             <form action="" method="get">
                                 <div class="row">
                                     <div class="col-sm-4">
@@ -36,8 +36,8 @@
                                         </div>
                                     </div>
                                 </div><!-- Row -->
-                                <button type="submit" class="btn btn-primary submit">Filter</button>
-                                <a href="<?= base_url($link_cetak) ?>" class="btn btn-success text-white">Cetak</a>
+                                <button type="submit" class="btn btn-primary submit">Cari</button>
+                                <a href="<?= base_url($link_cetak) ?>" class="btn btn-danger text-white">Cetak</a>
                             </form>
                         </div>
                     </div>
@@ -46,7 +46,7 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Email</th>
+                                    <th>Username</th>
                                     <th>Nama</th>
                                     <th>Hasil Diagnosa</th>
                                 </tr>
@@ -56,7 +56,7 @@
                                 foreach ($diagnosis as $row) : ?>
                                     <tr>
                                         <td><?= $no++ ?></td>
-                                        <td><?= $row['email'] ?></td>
+                                        <td><?= $row['username'] ?></td>
                                         <td><?= $row['nama_lengkap'] ?></td>
                                         <td><?= $row['nama_penyakit'] . " ({$row['hasil_moora']})" ?></td>
                                     </tr>

@@ -1,7 +1,7 @@
 <div class="page-content">
     <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
         <div>
-            <h4 class="mb-3 mb-md-0">Selamat Datang di Aplikasi Sitem Pakar Mendiagnosis pada masa kehamilan</h4>
+            <h4 class="mb-3 mb-md-0">Selamat Datang di Aplikasi Sitem Pakar Mendiagnosa Pneyakit pada Masa Kehamilan</h4>
         </div>
     </div>
     <div class="row">
@@ -53,3 +53,5 @@
         </div>
     </div>
 </div>
+<script src="<?= asset('assets/plugins/sweetalert2/sweetalert2.min.js') ?>"></script>
+<script src="<?= asset('assets/js/helpers.js') ?>"></script>

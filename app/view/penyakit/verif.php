@@ -32,7 +32,7 @@
                                 <tr>
                                     <td><?= $no++ ?></td>
                                     <td><?= "({$row['kode_penyakit']}) {$row['penyakit']}" ?></td>
-                                    <td style="white-space:normal;"><?= $row['solusi'] ?? '-' ?></td>
+                                    <td style="white-space:normal;text-align:justify;"><?= $row['solusi'] ?? '-' ?></td>
                                     <td><?= $row['bobot'] ?? '-' ?></td>
                                     <td><?= $statusVerif ?></td>
                                     <td>

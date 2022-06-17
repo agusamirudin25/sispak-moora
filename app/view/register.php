@@ -42,8 +42,8 @@
                                                 <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap" placeholder="Nama Lengkap Anda">
                                             </div>
                                             <div class="form-group">
-                                                <label for="email">Alamat email</label>
-                                                <input type="email" class="form-control" id="email" name="email" placeholder="Email Anda">
+                                                <label for="email">Username</label>
+                                                <input type="text" class="form-control" id="email" name="email" placeholder="Username Anda">
                                             </div>
                                             <div class="form-group">
                                                 <label for="password">Password</label>
@@ -57,7 +57,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6 pr-md-0">
-                                    <div class="auth-left-wrapper" style="background-image: url(<?= url('assets/images/login.png') ?>)">
+                                    <div class="auth-left-wrapper" style="background-image: url(<?= url('assets/images/default.png') ?>)">
                                     </div>
                                 </div>
                             </div>

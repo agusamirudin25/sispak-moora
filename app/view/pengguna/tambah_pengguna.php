@@ -12,9 +12,9 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="email" class="col-sm-3 col-form-label">Alamat Email</label>
+                            <label for="email" class="col-sm-3 col-form-label">Username</label>
                             <div class="col-sm-9">
-                                <input type="email" class="form-control" id="email" placeholder="Email" name="email" required>
+                                <input type="text" class="form-control" id="email" placeholder="Username" name="email" required>
                             </div>
                         </div>
                         <div class="form-group row">

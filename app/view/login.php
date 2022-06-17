@@ -29,23 +29,23 @@
         <div class="page-wrapper full-page">
             <div class="page-content d-flex align-items-center justify-content-center">
 
-                <div class="row w-100 mx-0 auth-page">
+            <div class="row w-100 mx-0 auth-page">
                     <div class="col-md-10 col-xl-8 mx-auto">
                         <div class="card">
                             <div class="row">
                                 <div class="col-md-6 pr-md-0">
-                                    <div class="auth-left-wrapper" style="background-image: url(assets/images/login.png)">
+                                    <div class="auth-left-wrapper" style="background-image: url(assets/images/default.png); width:100%;">
 
                                     </div>
                                 </div>
                                 <div class="col-md-6 pl-md-0">
                                     <div class="auth-form-wrapper px-4 py-5">
                                         <a href="<?= url('/') ?>" class="noble-ui-logo d-block mb-2"><?= ($title) ?? 'Sistem Pakar MOORA' ?></a>
-                                        <h5 class="text-muted font-weight-normal mb-4">Selamat Datang, Silakan masukan email dan password</h5>
+                                        <h5 class="text-muted font-weight-normal mb-4">Selamat Datang, Silakan masukan username dan password</h5>
                                         <form class="forms-sample" id="formLogin" autocomplete="off">
                                             <div class="form-group">
-                                                <label for="email">Alamat email</label>
-                                                <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+                                                <label for="email">Username</label>
+                                                <input type="text" class="form-control" id="email" name="email" placeholder="Username">
                                             </div>
                                             <div class="form-group">
                                                 <label for="password">Password</label>

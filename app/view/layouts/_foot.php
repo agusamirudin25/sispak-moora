@@ -23,6 +23,13 @@
         $(function() {
             $('#table').DataTable();
         });
+
+        $('#notificationDropdown').click(function(e) {
+            $('.nav-notifications .dropdown-menu').toggleClass('show');
+        });
+        setInterval(() => {
+            setNotif()
+        }, 1000);
     });
 
     function delete_data(id, ajax) {
@@ -94,6 +101,54 @@
              }
          })
      }
+
+    function alertConfirm(route, message = null)
+    {
+        if(message == null || message == '' || !message){
+            Swal.fire({
+                title: "Sistem Pakar",
+                text: `Apakah Anda yakin mengubah status ?`,
+                showCancelButton: true,
+                allowOutsideClick: false,
+                confirmButtonText: `Yakin`,
+                denyButtonText: `Tidak`,
+            }).then((result) => {
+                if (result.value) {
+                    location.href = route;
+                } else if (result.isDenied) {
+                    return false;
+                }
+            })
+        }else{
+            Swal.fire({
+                text: message,
+                title: "Sistem Pakar",
+                showCancelButton: true,
+                allowOutsideClick: false,
+                confirmButtonText: `Yakin`,
+            }).then((result) => {
+                if (result.value) {
+                    location.href = route;
+                } else if (result.isDenied) {
+                    return false;
+                }
+            })
+        }
+    }
+
+    const setNotif = () => {
+        $.ajax({
+            type: 'POST',
+            url: "<?= base_url('Dashboard/getNotif') ?>",
+            data: '',
+            cache: false,
+            dataType: 'json',
+            success: function(data) {
+                $('#notif-header').html(`${data.total} Konsultasi`)
+                $('#notif-menu').html(`${data.total}`)
+            }
+        });
+    }
 </script>
 
 </body>

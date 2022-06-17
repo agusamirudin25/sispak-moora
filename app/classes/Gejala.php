@@ -45,7 +45,7 @@ class Gejala
     {
         $input = post();
         $kode_gejala = $input['kode_gejala'];
-        $nama_gejala = strtoupper($input['gejala']);
+        $nama_gejala = ($input['gejala']);
         // cek gejala sudah ada atau belum
         $cek_nama_gejala = $this->_db->other_query("SELECT * FROM tb_gejala WHERE gejala = '{$nama_gejala}'");
         if ($cek_nama_gejala) {
@@ -78,7 +78,7 @@ class Gejala
     {
         $input = post();
         $kode_gejala = $input['kode_gejala'];
-        $nama_gejala = strtoupper($input['gejala']);
+        $nama_gejala = ($input['gejala']);
         // cek gejala sudah ada atau belum
         $cek_nama_gejala = $this->_db->other_query("SELECT * FROM tb_gejala WHERE gejala = '{$nama_gejala}' AND kode_gejala != '{$kode_gejala}'");
         if ($cek_nama_gejala) {
@@ -103,7 +103,7 @@ class Gejala
 
     public function lihatGejala()
     {
-        $data['gejala'] = $this->_db->other_query("SELECT * FROM tb_gejala ORDER BY `status`", 2);
+        $data['gejala'] = $this->_db->other_query("SELECT * FROM tb_gejala", 2);
         view('layouts/_head');
         view('gejala/verif', $data);
         view('layouts/_foot');
@@ -128,7 +128,7 @@ class Gejala
         $update = $this->_db->edit("UPDATE tb_gejala SET bobot = '$bobot', `status` = '$status' WHERE kode_gejala = '$kode_gejala'");
         if ($update) {
             $res['status'] = 1;
-            $res['msg'] = "Data gejala berhasil diverifikasi";
+            $res['msg'] = $status == 1 ? "Data gejala berhasil diverifikasi" : "Data gejala berhasil ditolak";
             $res['page'] = "gejala/lihatGejala";
         } else {
             $res['status'] = 0;

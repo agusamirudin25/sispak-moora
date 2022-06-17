@@ -25,13 +25,7 @@ class Penyakit
         view('layouts/_foot');
     }
 
-    public function cariData($nama_table, $field)
-    {
-        $data['penyakit'] = $this->_db->other_query("SELECT * FROM {$nama_table} WHERE {$field} LIKE '%" . $_POST['cari'] . "%'", 2);
-        view('layouts/_head');
-        view('penyakit/index', $data);
-        view('layouts/_foot');
-    }
+    
 
     public function tambahPenyakit()
     {
@@ -53,7 +47,7 @@ class Penyakit
     {
         $input = post();
         $kode_penyakit = $input['kode_penyakit'];
-        $nama_penyakit = strtoupper($input['penyakit']);
+        $nama_penyakit = ($input['penyakit']);
         $solusi = $input['solusi'];
         // cek nama_penyakit sudah ada atau belum
         $cek_nama_penyakit = $this->_db->other_query("SELECT * FROM tb_penyakit WHERE penyakit = '{$nama_penyakit}'");
@@ -87,7 +81,7 @@ class Penyakit
     {
         $input = post();
         $kode_penyakit = $input['kode_penyakit'];
-        $nama_penyakit = strtoupper($input['penyakit']);
+        $nama_penyakit = ($input['penyakit']);
         $solusi = $input['solusi'];
         // cek nama_penyakit sudah ada atau belum
         $cek_nama_penyakit = $this->_db->other_query("SELECT * FROM tb_penyakit WHERE penyakit = '{$nama_penyakit}' AND kode_penyakit != '{$kode_penyakit}'");
@@ -112,7 +106,7 @@ class Penyakit
 
     public function lihatPenyakit()
     {
-        $data['penyakit'] = $this->_db->other_query("SELECT * FROM tb_penyakit ORDER BY `status`", 2);
+        $data['penyakit'] = $this->_db->other_query("SELECT * FROM tb_penyakit", 2);
         view('layouts/_head');
         view('penyakit/verif', $data);
         view('layouts/_foot');
@@ -137,7 +131,7 @@ class Penyakit
         $update = $this->_db->edit("UPDATE tb_penyakit SET bobot = '$bobot', `status` = '$status' WHERE kode_penyakit = '$kode_penyakit'");
         if ($update) {
             $res['status'] = 1;
-            $res['msg'] = "Data penyakit berhasil diverifikasi";
+            $res['msg'] = $status == 1 ? "Data penyakit berhasil diverifikasi" : "Data penyakit berhasil ditolak";
             $res['page'] = "penyakit/lihatPenyakit";
         } else {
             $res['status'] = 0;
