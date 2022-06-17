@@ -11,7 +11,7 @@
  Target Server Version : 100406
  File Encoding         : 65001
 
- Date: 07/06/2022 00:30:28
+ Date: 17/06/2022 18:39:08
 */
 
 SET NAMES utf8mb4;
@@ -23,24 +23,25 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `tb_diagnosis`;
 CREATE TABLE `tb_diagnosis`  (
   `id_diagnosis` int(11) NOT NULL AUTO_INCREMENT,
-  `email` varchar(128) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `username` varchar(128) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `data_gejala` varchar(128) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `penyakit` varchar(64) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `hasil_moora` varchar(64) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `created_at` datetime(0) NULL DEFAULT current_timestamp(0),
   PRIMARY KEY (`id_diagnosis`) USING BTREE,
-  INDEX `email`(`email`) USING BTREE,
+  INDEX `email`(`username`) USING BTREE,
   INDEX `penyakit`(`penyakit`) USING BTREE,
-  CONSTRAINT `email` FOREIGN KEY (`email`) REFERENCES `tb_pengguna` (`email`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `email` FOREIGN KEY (`username`) REFERENCES `tb_pengguna` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `penyakit` FOREIGN KEY (`penyakit`) REFERENCES `tb_penyakit` (`kode_penyakit`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_diagnosis
 -- ----------------------------
-INSERT INTO `tb_diagnosis` VALUES (1, 'nita@gmail.com', '[\"G26\",\"G27\",\"G28\",\"G29\"]', 'P09', '0.15859851314591', '2022-05-22 19:12:29');
-INSERT INTO `tb_diagnosis` VALUES (2, 'nita@gmail.com', '[\"G01\",\"G02\",\"G03\",\"G05\"]', 'P01', '0.11894888485943', '2022-05-22 19:21:56');
-INSERT INTO `tb_diagnosis` VALUES (3, 'nita@gmail.com', '[\"G01\",\"G02\",\"G03\",\"G05\"]', 'P01', '0.11894888485943', '2022-06-07 00:25:54');
+INSERT INTO `tb_diagnosis` VALUES (1, 'nita', '[\"G26\",\"G27\",\"G28\",\"G29\"]', 'P09', '0.15859851314591', '2022-05-22 19:12:29');
+INSERT INTO `tb_diagnosis` VALUES (2, 'nita', '[\"G01\",\"G02\",\"G03\",\"G05\"]', 'P01', '0.11894888485943', '2022-05-22 19:21:56');
+INSERT INTO `tb_diagnosis` VALUES (3, 'nita', '[\"G01\",\"G02\",\"G03\",\"G05\"]', 'P01', '0.11894888485943', '2022-06-07 00:25:54');
+INSERT INTO `tb_diagnosis` VALUES (4, 'nita', '[\"G01\",\"G02\",\"G03\",\"G04\",\"G05\"]', 'P01', '0.13279268920044', '2022-06-17 03:04:55');
 
 -- ----------------------------
 -- Table structure for tb_gejala
@@ -59,7 +60,7 @@ CREATE TABLE `tb_gejala`  (
 -- ----------------------------
 -- Records of tb_gejala
 -- ----------------------------
-INSERT INTO `tb_gejala` VALUES ('G01', 'Urine keruh atau berdarah', '0.03', 1, '2022-05-15 08:28:30', '2022-05-22 13:44:59');
+INSERT INTO `tb_gejala` VALUES ('G01', 'Urine keruh atau berdarah', '0.03', 1, '2022-05-15 08:28:30', '2022-06-17 03:01:46');
 INSERT INTO `tb_gejala` VALUES ('G02', 'Nyeri saat buang air kecil', '0.03', 1, '2022-05-22 12:32:34', '2022-05-22 13:45:02');
 INSERT INTO `tb_gejala` VALUES ('G03', 'Demam', '0.04', 1, '2022-05-22 12:32:37', '2022-05-22 13:45:05');
 INSERT INTO `tb_gejala` VALUES ('G04', 'Sering Sendawa', '0.04', 1, '2022-05-22 12:32:39', '2022-05-22 13:45:09');
@@ -155,10 +156,6 @@ CREATE TABLE `tb_jawaban_konsultasi`  (
 -- ----------------------------
 -- Records of tb_jawaban_konsultasi
 -- ----------------------------
-INSERT INTO `tb_jawaban_konsultasi` VALUES (1, 1, 'ya, ada apa?', 1, '2022-05-22 19:11:31');
-INSERT INTO `tb_jawaban_konsultasi` VALUES (2, 1, 'jadi gini', 0, '2022-05-22 19:11:43');
-INSERT INTO `tb_jawaban_konsultasi` VALUES (3, 1, 'kenapa?', 1, '2022-05-22 19:11:50');
-INSERT INTO `tb_jawaban_konsultasi` VALUES (4, 1, 'saya bingung', 0, '2022-05-22 19:11:57');
 INSERT INTO `tb_jawaban_konsultasi` VALUES (5, 4, 'ya', 0, '2022-06-07 00:16:30');
 INSERT INTO `tb_jawaban_konsultasi` VALUES (6, 4, 'apa ?', 1, '2022-06-07 00:17:49');
 INSERT INTO `tb_jawaban_konsultasi` VALUES (7, 4, 'nggaa', 0, '2022-06-07 00:17:57');
@@ -169,21 +166,19 @@ INSERT INTO `tb_jawaban_konsultasi` VALUES (7, 4, 'nggaa', 0, '2022-06-07 00:17:
 DROP TABLE IF EXISTS `tb_konsultasi`;
 CREATE TABLE `tb_konsultasi`  (
   `id_konsultasi` int(11) NOT NULL AUTO_INCREMENT,
-  `email` varchar(128) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `username` varchar(128) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `pertanyaan` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
   `created_at` datetime(0) NULL DEFAULT current_timestamp(0),
   PRIMARY KEY (`id_konsultasi`) USING BTREE,
-  INDEX `mail`(`email`) USING BTREE,
-  CONSTRAINT `mail` FOREIGN KEY (`email`) REFERENCES `tb_pengguna` (`email`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+  INDEX `mail`(`username`) USING BTREE,
+  CONSTRAINT `mail` FOREIGN KEY (`username`) REFERENCES `tb_pengguna` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_konsultasi
 -- ----------------------------
-INSERT INTO `tb_konsultasi` VALUES (1, 'nita@gmail.com', 'haloo pakar, saya mau bertanya', '2022-05-22 19:11:18');
-INSERT INTO `tb_konsultasi` VALUES (2, 'nita@gmail.com', 'tes tes', '2022-06-07 00:15:06');
-INSERT INTO `tb_konsultasi` VALUES (3, 'nita@gmail.com', 'tes tes', '2022-06-07 00:15:14');
-INSERT INTO `tb_konsultasi` VALUES (4, 'nita@gmail.com', 'tes tes', '2022-06-07 00:16:03');
+INSERT INTO `tb_konsultasi` VALUES (3, 'nita', 'tes tes', '2022-06-07 00:15:14');
+INSERT INTO `tb_konsultasi` VALUES (4, 'nita', 'tes tes', '2022-06-07 00:16:03');
 
 -- ----------------------------
 -- Table structure for tb_pengetahuan
@@ -266,14 +261,14 @@ INSERT INTO `tb_pengetahuan` VALUES (56, 'P14', 'G45', '2022-05-22 12:57:47.8');
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_pengguna`;
 CREATE TABLE `tb_pengguna`  (
-  `email` varchar(128) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `username` varchar(128) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `nama_lengkap` varchar(128) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `password` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `tipe` int(2) NULL DEFAULT NULL,
   `status` int(1) NULL DEFAULT NULL,
   `created_at` datetime(0) NULL DEFAULT current_timestamp(0),
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
-  PRIMARY KEY (`email`) USING BTREE,
+  PRIMARY KEY (`username`) USING BTREE,
   INDEX `roles`(`tipe`) USING BTREE,
   CONSTRAINT `roles` FOREIGN KEY (`tipe`) REFERENCES `tb_role` (`id_role`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
@@ -281,9 +276,9 @@ CREATE TABLE `tb_pengguna`  (
 -- ----------------------------
 -- Records of tb_pengguna
 -- ----------------------------
-INSERT INTO `tb_pengguna` VALUES ('admin@gmail.com', 'Admin', '$2y$10$XcQledQ4ovCMMMOBNgvc7ehUoRV1Q./NsS9QtTL4oFuTd1t3Rr.6m', 1, 1, '2022-04-14 13:29:33', NULL);
-INSERT INTO `tb_pengguna` VALUES ('nita@gmail.com', 'Nita Astuti', '$2y$10$q6YSBuv1OUvRRrJlXy46Puj3Rr2m.6lAkg1bMjQOtNlcO9VRrV/Pm', 3, 1, '2022-05-22 18:37:00', NULL);
-INSERT INTO `tb_pengguna` VALUES ('pakar@gmail.com', 'Pakar', '$2y$10$qQtTzGUOCcdosVPpn17uaerye.zkt34LOhuxbxHlVP1ySexXuerQe', 2, 1, '2022-05-15 07:58:30', '2022-05-22 18:45:48');
+INSERT INTO `tb_pengguna` VALUES ('admin', 'Admin', '$2y$10$XcQledQ4ovCMMMOBNgvc7ehUoRV1Q./NsS9QtTL4oFuTd1t3Rr.6m', 1, 1, '2022-04-14 13:29:33', '2022-06-17 02:35:50');
+INSERT INTO `tb_pengguna` VALUES ('nita', 'Nita Astuti', '$2y$10$q6YSBuv1OUvRRrJlXy46Puj3Rr2m.6lAkg1bMjQOtNlcO9VRrV/Pm', 3, 1, '2022-05-22 18:37:00', '2022-06-17 02:35:53');
+INSERT INTO `tb_pengguna` VALUES ('pakar', 'Pakar', '$2y$10$qQtTzGUOCcdosVPpn17uaerye.zkt34LOhuxbxHlVP1ySexXuerQe', 2, 1, '2022-05-15 07:58:30', '2022-06-17 02:35:58');
 
 -- ----------------------------
 -- Table structure for tb_penyakit
