@@ -21,7 +21,7 @@
                             <label for="bobot" class="col-sm-3 col-form-label">Bobot</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="bobot" placeholder="bobot" name="bobot" required value="<?= $gejala->bobot ?>">
-                                <span class="text-info">contoh : 0.06</span>
+                                <span class="text-warning">Contoh : 0.06 (tidak boleh dari 1)</span>
                             </div>
                         </div>
                         <div class="form-group row">
